@@ -12,7 +12,8 @@ function Home(){
         
     ];
 
-    const handleSearch = () => {
+    const handleSearch = (e) => {
+        e.preventDefault() // to stop refresh
         alert(searchQuery);
     }
 
@@ -30,9 +31,11 @@ function Home(){
             <button type="submit" className="search-button">Search</button>
         </form>
         <div className="movies-grid">
-            {movies.map ( (movie) =>(
-            <MovieCard movie={movie} key={movie.id} /> 
-            ))}
+            {movies.map ( (movie) =>( 
+                movie.title.toLowerCase().startsWith(searchQuery) &&
+                <MovieCard movie={movie} key={movie.id} /> 
+                )
+            )}
         </div>
     </div>)
 }
